@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+</head>
+<body>
+    <h2>Quiz Results</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                {% if admin %}
+                <th>Student Name</th>
+                {% endif %}
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in quiz_results %}
+            <tr>
+                <td>{{ result[0] }}</td>
+                {% if admin %}
+                <td>{{ get_student_name(result[0]) }}</td>
+                {% endif %}
+                <td>{{ result[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

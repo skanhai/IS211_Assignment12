@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Quiz Results</title>
+</head>
+<body>
+    <h1>Student Quiz Results</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Quiz ID</th>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Score</th>
+                {% if logged_in %}
+                <th>Action</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in quiz_results %}
+            <tr>
+                <td>{{ result[0] }}</td>
+                <td>{{ result[1] }}</td>
+                <td>{{ result[2] }}</td>
+                <td>{{ result[3] }}</td>
+                {% if logged_in %}
+                <td>
+                    <form action="{{ url_for('delete_result', id=result[0]) }}" method="post">
+                        <input type="hidden" name="result_id_{{ loop.index }}" value="{{ result[0] }}">
+                        <input type="hidden" name="index" value="{{ loop.index }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
